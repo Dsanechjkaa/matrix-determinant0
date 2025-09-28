@@ -1,0 +1,29 @@
+#include <gtest/gtest.h>
+#include "matrix_determinant/matrix_determinant.hpp"
+using namespace matrix_determinant;
+
+TEST(MatrixTest, TwoByTwo) {
+    std::vector<std::vector<double>> matrix{{1.0, 2.0}, {3.0, 4.0}};
+    EXPECT_DOUBLE_EQ(determinant(matrix), -2.0);
+}
+
+TEST(MatrixTest, ThreeByThree) {
+    std::vector<std::vector<double>> matrix{{1.0, 0.0, 0.0},
+                                            {0.0, 1.0, 0.0},
+                                            {0.0, 0.0, 1.0}};
+    EXPECT_DOUBLE_EQ(determinant(matrix), 1.0);
+}
+
+TEST(GaussTest, SimpleSystem) {
+    std::vector<std::vector<double>> matrix = {
+        {2, 1},
+        {1, 1}
+    };
+    std::vector<double> vector = {3, 2};
+    
+    std::vector<double> solution = gaussSolve(matrix, vector);
+    
+    EXPECT_NEAR(solution[0], 1.0, 0.1);
+    EXPECT_NEAR(solution[1], 1.0, 0.1);
+}
+
